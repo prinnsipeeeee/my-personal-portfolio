@@ -121,12 +121,12 @@ const copyEmailToClipboard = async () => {
         <!-- Secondary Action: Email Me -->
         <a
           :href="`mailto:${profileConfig.email}`"
-          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-brand-orange text-brand-orange dark:text-brand-orange font-medium text-sm tracking-wide hover:bg-brand-orange hover:text-white hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus:outline-none"
+          class="group inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white dark:hover:text-white hover:shadow-lg hover:shadow-brand-orange/25 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus:outline-none"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 text-brand-orange group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          <span>Email Me</span>
+          <span class="text-brand-orange group-hover:text-white transition-colors duration-200">Email Me</span>
         </a>
 
       </div>

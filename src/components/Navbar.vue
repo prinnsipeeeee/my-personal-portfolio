@@ -143,24 +143,6 @@ onUnmounted(() => {
               <img src="/assets/logo_1.png" alt="Logo" class="w-full h-full object-cover rounded-[6.5px]" />
             </div>
           </div>
-
-          <!-- Name & Tagline -->
-          <div class="flex flex-col text-left">
-            <div class="flex items-center font-display tracking-tight text-base">
-              <span class="font-bold text-gray-900 dark:text-white transition-colors group-hover:text-brand-orange">
-                Prince
-              </span>
-              <span class="ml-1 font-normal text-gray-500 dark:text-gray-400">
-                Peñaflor
-              </span>
-              <!-- Blinking Terminal Cursor -->
-              <span class="ml-1 font-mono text-brand-orange animate-cursor-blink select-none font-bold">_</span>
-            </div>
-            <!-- Subtitle Tagline in JetBrains Mono -->
-            <span class="font-mono text-[10px] text-gray-400 dark:text-gray-500 tracking-wider uppercase">
-              // web developer
-            </span>
-          </div>
         </a>
 
         <!-- Desktop Navigation Items -->
