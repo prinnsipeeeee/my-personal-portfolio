@@ -4,8 +4,6 @@
 
 /**
  * Global Fixed Ambient Background Layer
- * Smooth gradient transition between dark navy and crisp light theme,
- * with an ambient orange glow positioned subtly in the upper-right corner.
  */
 .bg-site-ambient {
   position: fixed;
@@ -13,7 +11,6 @@
   z-index: -10;
   pointer-events: none;
   overflow: hidden;
-  /* Light Mode: Off-white and subtle sky-blue gradient with warm ambient highlight */
   background: 
     radial-gradient(circle at 85% 12%, rgba(247, 127, 0, 0.08) 0%, transparent 40%),
     linear-gradient(135deg, #ffffff 0%, #f8fafc 45%, #f1f5f9 100%);
@@ -21,7 +18,6 @@
 }
 
 .dark .bg-site-ambient {
-  /* Dark Mode: Deep navy base transitioning into darker tone with orange accent glow */
   background: 
     radial-gradient(circle at 85% 12%, rgba(247, 127, 0, 0.12) 0%, transparent 35%),
     linear-gradient(145deg, #0B132B 0%, #0d1736 50%, #050811 100%);
@@ -29,8 +25,6 @@
 
 /**
  * Global SVG Grain / Noise Overlay
- * Lightweight pure data-URI SVG fractal noise filter.
- * Provides a tactile matte texture without layout shifting or external assets.
  */
 .bg-site-grain {
   position: fixed;
@@ -38,9 +32,46 @@
   z-index: -9;
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.025; /* Light mode: barely noticeable texture */
+  opacity: 0.025;
 }
 
 .dark .bg-site-grain {
-  opacity: 0.045; /* Dark mode: subtle tactile grain */
+  opacity: 0.045;
+}
+
+/**
+ * Pure CSS Hero Stagger Animation Keyframes
+ */
+@keyframes heroFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-fade {
+  animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0; /* Ensures element stays hidden prior to animation start */
+}
+
+/* Stagger Delay Utility Classes */
+.delay-1 { animation-delay: 100ms; }
+.delay-2 { animation-delay: 200ms; }
+.delay-3 { animation-delay: 300ms; }
+.delay-4 { animation-delay: 450ms; }
+.delay-5 { animation-delay: 600ms; }
+.delay-6 { animation-delay: 750ms; }
+.delay-7 { animation-delay: 900ms; }
+
+/* Accessibility: Disable animation for reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-fade {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

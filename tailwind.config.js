@@ -11,6 +11,7 @@ export default {
         display: ['"Space Grotesk"', 'sans-serif'],
         sans: ['"Inter"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
+        'serif-accent': ['"Instrument Serif"', 'serif'],
       },
       colors: {
         'brand-dark': {
