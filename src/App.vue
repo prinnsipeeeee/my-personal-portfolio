@@ -3,12 +3,12 @@ import { MotionConfig } from 'motion-v'
 import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
 import About from './components/About.vue'
+import Skills from './components/Skills.vue'
 
 /**
- * Remaining section placeholders (About is now a dedicated component).
+ * Remaining section placeholders (Projects and Experience).
  */
 const sections = [
-  { id: 'skills', title: 'Skills Section' },
   { id: 'projects', title: 'Projects Section' },
   { id: 'experience', title: 'Experience / Education Section' },
 ]
@@ -32,8 +32,11 @@ const sections = [
         <!-- Hero Section -->
         <Hero />
 
-        <!-- Dedicated About Section -->
+        <!-- About Section -->
         <About />
+
+        <!-- Dedicated Skills Section -->
+        <Skills />
 
         <!-- Remaining Section Placeholders -->
         <div class="space-y-24 py-16">
