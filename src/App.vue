@@ -4,12 +4,12 @@ import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
 import About from './components/About.vue'
 import Skills from './components/Skills.vue'
+import Projects from './components/Projects.vue'
 
 /**
- * Remaining section placeholders (Projects and Experience).
+ * Remaining section placeholder (Experience).
  */
 const sections = [
-  { id: 'projects', title: 'Projects Section' },
   { id: 'experience', title: 'Experience / Education Section' },
 ]
 </script>
@@ -35,8 +35,11 @@ const sections = [
         <!-- About Section -->
         <About />
 
-        <!-- Dedicated Skills Section -->
+        <!-- Skills Section -->
         <Skills />
+
+        <!-- Dedicated Projects Section with Modal -->
+        <Projects />
 
         <!-- Remaining Section Placeholders -->
         <div class="space-y-24 py-16">
