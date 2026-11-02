@@ -2,13 +2,12 @@
 import { MotionConfig } from 'motion-v'
 import Navbar from './components/Navbar.vue'
 import Hero from './components/Hero.vue'
+import About from './components/About.vue'
 
 /**
- * Section definitions for the single-page layout.
- * Used for anchor point navigation and IntersectionObserver tracking.
+ * Remaining section placeholders (About is now a dedicated component).
  */
 const sections = [
-  { id: 'about', title: 'About Section' },
   { id: 'skills', title: 'Skills Section' },
   { id: 'projects', title: 'Projects Section' },
   { id: 'experience', title: 'Experience / Education Section' },
@@ -16,7 +15,6 @@ const sections = [
 </script>
 
 <template>
-  <!-- MotionConfig provides global motion settings and respects prefers-reduced-motion -->
   <MotionConfig reduced-motion="user">
     <div class="relative min-h-screen text-gray-900 dark:text-gray-100 transition-colors duration-500 overflow-x-hidden font-sans">
       
@@ -26,7 +24,7 @@ const sections = [
       <!-- Global Subtle SVG Grain Texture Layer -->
       <div class="bg-site-grain"></div>
 
-      <!-- Motion-powered Sticky Navbar -->
+      <!-- Motion Sticky Navbar -->
       <Navbar />
 
       <!-- Main Content Flow -->
@@ -34,7 +32,10 @@ const sections = [
         <!-- Hero Section -->
         <Hero />
 
-        <!-- Placeholder Sections -->
+        <!-- Dedicated About Section -->
+        <About />
+
+        <!-- Remaining Section Placeholders -->
         <div class="space-y-24 py-16">
           <section
             v-for="section in sections"

@@ -12,6 +12,7 @@ export default {
         sans: ['"Inter"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
         'serif-accent': ['"Instrument Serif"', 'serif'],
+        script: ['"Caveat"', 'cursive'],
       },
       colors: {
         'brand-dark': {
