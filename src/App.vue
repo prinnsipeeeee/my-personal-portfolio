@@ -6,6 +6,8 @@ import About from './components/About.vue'
 import Skills from './components/Skills.vue'
 import Projects from './components/Projects.vue'
 import Experience from './components/Experience.vue'
+import Contact from './components/Contact.vue'
+import Footer from './components/Footer.vue'
 </script>
 
 <template>
@@ -35,9 +37,15 @@ import Experience from './components/Experience.vue'
         <!-- Projects Section -->
         <Projects />
 
-        <!-- Dedicated Experience & Education Section -->
+        <!-- Experience & Education Section -->
         <Experience />
+
+        <!-- Contact Section -->
+        <Contact />
       </main>
+
+      <!-- Bold Modern Footer -->
+      <Footer />
 
     </div>
   </MotionConfig>

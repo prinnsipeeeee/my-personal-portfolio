@@ -3,23 +3,12 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
 import { springTransition, mobileMenuVariant } from '../lib/motion'
 
-/**
- * State Management
- * - isVisible: controls hide-on-top behavior (hidden when scrollY <= 80, revealed when scrolled)
- * - isScrolled: adds depth and compresses padding deeper down the page
- * - isMobileMenuOpen: controls mobile navigation drawer
- * - isDarkMode: tracks theme state
- * - activeSection: tracks currently visible section for shared layout animation
- */
 const isVisible = ref(false)
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
 const isDarkMode = ref(false)
 const activeSection = ref('home')
 
-/**
- * Navigation items.
- */
 const navLinks = [
   { name: 'Home', href: '#home', id: 'home' },
   { name: 'About', href: '#about', id: 'about' },
@@ -28,10 +17,6 @@ const navLinks = [
   { name: 'Experience', href: '#experience', id: 'experience' },
 ]
 
-/**
- * Window scroll listener:
- * Keeps navbar hidden when at the top (scrollY <= 80) and reveals it when scrolled.
- */
 const handleScroll = () => {
   const currentScroll = window.scrollY
   isVisible.value = currentScroll > 80
@@ -42,9 +27,6 @@ const handleScroll = () => {
   }
 }
 
-/**
- * Theme toggle handler syncing DOM root and localStorage.
- */
 const toggleDarkMode = () => {
   isDarkMode.value = !isDarkMode.value
 
@@ -57,18 +39,12 @@ const toggleDarkMode = () => {
   }
 }
 
-/**
- * Closes mobile drawer when a link is clicked.
- */
 const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
 
 let observer = null
 
-/**
- * Sets up IntersectionObserver for dynamic active section tracking.
- */
 const setupIntersectionObserver = () => {
   const sectionIds = ['home', 'about', 'skills', 'projects', 'experience', 'contact']
   const options = {
@@ -115,7 +91,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <!-- Fixed Scroll-Triggered Navbar: Hidden on top, slides down on scroll -->
   <header
     :class="[
       'fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md border-b transition-all duration-300 ease-in-out font-sans',
@@ -128,7 +103,6 @@ onUnmounted(() => {
     ]"
   >
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- 3-Part Balanced Grid -->
       <div class="grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] items-center">
         
         <!-- LEFT: Minimalist Logo Link -->
@@ -141,14 +115,14 @@ onUnmounted(() => {
             class="relative w-9 h-9 rounded-lg p-[1.5px] bg-gradient-to-br from-brand-orange via-brand-orange/60 to-brand-dark dark:to-blue-600 focus:outline-none transition-shadow hover:shadow-[0_0_14px_rgba(247,127,0,0.45)] group"
           >
             <div class="w-full h-full rounded-[6.5px] bg-white dark:bg-brand-dark flex items-center justify-center">
-
-              <img src="/assets/logo_1.png" alt="Logo" class="w-full h-full object-cover rounded-[6.5px]" />
-             
+              <span class="font-display font-bold text-xs tracking-tight text-brand-dark dark:text-white group-hover:text-brand-orange transition-colors">
+                PR
+              </span>
             </div>
           </motion.a>
         </div>
 
-        <!-- CENTER: Centered Navigation Links with Shared Layout Indicator -->
+        <!-- CENTER: Centered Navigation Links -->
         <nav class="hidden md:flex items-center justify-center space-x-1">
           <a
             v-for="link in navLinks"
@@ -161,7 +135,6 @@ onUnmounted(() => {
                 : 'text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white'
             ]"
           >
-            <!-- Animated Shared Layout Active Pill -->
             <motion.span
               v-if="activeSection === link.id"
               layout-id="active-nav-indicator"
@@ -178,10 +151,10 @@ onUnmounted(() => {
           </a>
         </nav>
 
-        <!-- RIGHT: Contact / Let's Work CTA Button + Theme Toggle -->
+        <!-- RIGHT: "Let's Work" Action Button + Theme Toggle -->
         <div class="flex items-center justify-end space-x-3">
           
-          <!-- Contact / Let's Work Button (Desktop) -->
+          <!-- Wired directly to #contact with Active Indicator Synchronization -->
           <motion.a
             href="#contact"
             :while-hover="{ scale: 1.03, y: -1 }"
@@ -199,7 +172,7 @@ onUnmounted(() => {
             </svg>
           </motion.a>
 
-          <!-- Theme Mode Switcher with Smooth Rotation/Fade -->
+          <!-- Theme Mode Switcher -->
           <motion.button
             type="button"
             @click="toggleDarkMode"
@@ -237,7 +210,7 @@ onUnmounted(() => {
             </AnimatePresence>
           </motion.button>
 
-          <!-- Animated Hamburger Button for Mobile -->
+          <!-- Mobile Hamburger -->
           <button
             type="button"
             @click="isMobileMenuOpen = !isMobileMenuOpen"
@@ -250,19 +223,19 @@ onUnmounted(() => {
                   'w-full h-0.5 bg-current rounded-full transition-all duration-300 origin-left',
                   isMobileMenuOpen ? 'rotate-45 translate-x-1 -translate-y-0.5' : ''
                 ]"
-              ></span>
+              />
               <span
                 :class="[
                   'w-full h-0.5 bg-current rounded-full transition-all duration-200',
                   isMobileMenuOpen ? 'opacity-0' : 'opacity-100'
                 ]"
-              ></span>
+              />
               <span
                 :class="[
                   'w-full h-0.5 bg-current rounded-full transition-all duration-300 origin-left',
                   isMobileMenuOpen ? '-rotate-45 translate-x-1 translate-y-0.5' : ''
                 ]"
-              ></span>
+              />
             </div>
           </button>
 
@@ -271,7 +244,7 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Mobile Navigation Drawer via AnimatePresence -->
+    <!-- Mobile Drawer -->
     <AnimatePresence>
       <motion.div
         v-if="isMobileMenuOpen"
