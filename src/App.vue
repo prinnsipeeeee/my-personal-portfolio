@@ -5,13 +5,7 @@ import Hero from './components/Hero.vue'
 import About from './components/About.vue'
 import Skills from './components/Skills.vue'
 import Projects from './components/Projects.vue'
-
-/**
- * Remaining section placeholder (Experience).
- */
-const sections = [
-  { id: 'experience', title: 'Experience / Education Section' },
-]
+import Experience from './components/Experience.vue'
 </script>
 
 <template>
@@ -38,21 +32,11 @@ const sections = [
         <!-- Skills Section -->
         <Skills />
 
-        <!-- Dedicated Projects Section with Modal -->
+        <!-- Projects Section -->
         <Projects />
 
-        <!-- Remaining Section Placeholders -->
-        <div class="space-y-24 py-16">
-          <section
-            v-for="section in sections"
-            :key="section.id"
-            :id="section.id"
-            class="min-h-[60vh] p-8 rounded-2xl border border-dashed border-gray-300/60 dark:border-gray-800/60 backdrop-blur-[1px] flex flex-col justify-center items-center text-center"
-          >
-            <span class="text-sm font-semibold tracking-wide uppercase text-brand-orange mb-2">Section Placeholder</span>
-            <h2 class="text-3xl font-bold font-display">{{ section.title }}</h2>
-          </section>
-        </div>
+        <!-- Dedicated Experience & Education Section -->
+        <Experience />
       </main>
 
     </div>
