@@ -1,14 +1,11 @@
 /**
- * =======================================================================
- * PRINCE ALBERT C. PEÑAFLOR - SKILLS DATA CONFIGURATION
- * =======================================================================
- * Naka-base sa opisyal na Resume:
- * - Frontend Development
- * - Programming Languages
- * - Database Management
- * - Software Testing & QA
- * - Tools & Deployment
- * =======================================================================
+ * Skills data — Stack Index
+ *
+ * Paano i-edit:
+ * - Magdagdag ng category: mag-push ng object sa `categories` (id, label, description, skills[]). Max 6 categories.
+ * - Magbawas: tanggalin ang category o skill object. Ang tab count ay automatic.
+ * - Palitan ang skill: i-edit ang `name`, `icon` (simple-icons export o `null` para sa initials), `tier` (`core` | `familiar`), at `note` (1 linya, ~60 chars).
+ * - Currently learning: i-edit ang `learning` array. Walang personal info dito.
  */
 
 import {
@@ -26,90 +23,83 @@ import {
   siSupabase,
   siGit,
   siGithub,
+  siGithubpages,
   siVite,
   siFigma,
-  siVercel
+  siVercel,
+  siHostinger,
 } from 'simple-icons'
-
-// Helper function para sa awtomatikong level labels
-export const getLevelLabel = (level) => {
-  switch (Number(level)) {
-    case 1: return 'Learning'
-    case 2: return 'Basic'
-    case 3: return 'Comfortable'
-    case 4: return 'Proficient'
-    case 5: return 'Advanced'
-    default: return 'Familiar'
-  }
-}
 
 export const skillsData = {
   categories: [
     {
       id: 'frontend',
       label: 'Frontend',
-      command: 'stack --load frontend',
-      description: 'Responsive web design, modern component architectures, and UI implementation.',
+      description: 'Interfaces I actually ship: markup, layout, and component UI.',
       skills: [
-        { name: 'HTML5', icon: siHtml5, level: 5, note: 'Semantic markup & accessible structure' },
-        { name: 'CSS3', icon: siCss, level: 5, note: 'Responsive design & flexbox/grid layouts' },
-        { name: 'JavaScript', icon: siJavascript, level: 4, note: 'DOM manipulation, ES6+ & async logic' },
-        { name: 'React.js', icon: siReact, level: 4, note: 'Reusable components, hooks & state' },
-        { name: 'Vue.js', icon: siVuedotjs, level: 4, note: 'Composition API & reactive architecture' },
-        { name: 'Tailwind CSS', icon: siTailwindcss, level: 5, note: 'Utility-first modern interface styling' },
+        { name: 'HTML5', icon: siHtml5, tier: 'core', note: 'Semantic markup and accessible structure' },
+        { name: 'CSS3', icon: siCss, tier: 'core', note: 'Responsive layouts with Flexbox and Grid' },
+        { name: 'JavaScript', icon: siJavascript, tier: 'core', note: 'DOM, ES6+, and async client logic' },
+        { name: 'React.js', icon: siReact, tier: 'familiar', note: 'Components, hooks, and shared state' },
+        { name: 'Vue.js', icon: siVuedotjs, tier: 'core', note: 'Composition API and reactive UI' },
+        { name: 'Tailwind CSS', icon: siTailwindcss, tier: 'core', note: 'Utility-first interface styling' },
       ],
     },
     {
       id: 'languages',
       label: 'Languages',
-      command: 'stack --load languages',
-      description: 'Core programming languages for application logic, scripting, and enterprise systems.',
+      description: 'Languages I use beyond the browser for logic and training.',
       skills: [
-        { name: 'Java', icon: siOpenjdk, level: 4, note: 'NC III Competency Training & OOP' },
-        { name: 'PHP', icon: siPhp, level: 4, note: 'Server-side scripting & data handling' },
-        { name: 'Python', icon: siPython, level: 3, note: 'Scripting, algorithms & automation' },
-        { name: 'JavaScript', icon: siJavascript, level: 4, note: 'Full-stack application logic' },
+        { name: 'Java', icon: siOpenjdk, tier: 'familiar', note: 'NC III training and object-oriented code' },
+        { name: 'PHP', icon: siPhp, tier: 'familiar', note: 'Server-side scripting and data handling' },
+        { name: 'Python', icon: siPython, tier: 'familiar', note: 'Scripting, algorithms, and automation' },
       ],
     },
     {
       id: 'database',
       label: 'Database',
-      command: 'stack --load database',
-      description: 'Relational data modeling, cloud datastores, authentication, and backend services.',
+      description: 'Stores and backend services I have used in student and client work.',
       skills: [
-        { name: 'Supabase', icon: siSupabase, level: 4, note: 'Postgres backend, auth & real-time' },
-        { name: 'Firebase', icon: siFirebase, level: 4, note: 'NoSQL real-time store & hosting' },
-        { name: 'MySQL', icon: siMysql, level: 4, note: 'Relational database schema & queries' },
+        { name: 'MySQL', icon: siMysql, tier: 'familiar', note: 'Relational schemas and SQL queries' },
+        { name: 'Firebase', icon: siFirebase, tier: 'familiar', note: 'Realtime NoSQL store and hosting' },
+        { name: 'Supabase', icon: siSupabase, tier: 'familiar', note: 'Postgres backend, auth, and realtime' },
       ],
     },
     {
       id: 'testing',
       label: 'Testing & QA',
-      command: 'stack --load testing-qa',
-      description: 'Manual verification, bug reporting, and functional component testing.',
+      description: 'How I check that a build actually works before it ships.',
       skills: [
-        { name: 'Manual Testing', icon: null, level: 4, note: 'Test case execution & verification' },
-        { name: 'Functional Testing', icon: null, level: 4, note: 'Feature workflows & UX validation' },
-        { name: 'Bug Identification', icon: null, level: 4, note: 'Defect logging & troubleshooting' },
-        { name: 'Quality Assurance', icon: null, level: 4, note: 'Cross-browser & device compliance' },
+        { name: 'Manual Testing', icon: null, tier: 'familiar', note: 'Test cases and verification' },
+        { name: 'Functional Testing', icon: null, tier: 'familiar', note: 'Feature flows and UX checks' },
+        { name: 'Bug Identification', icon: null, tier: 'familiar', note: 'Defect logging and troubleshooting' },
+        { name: 'Debugging', icon: null, tier: 'familiar', note: 'Isolating and fixing broken behavior' },
+        { name: 'Quality Assurance', icon: null, tier: 'familiar', note: 'Cross-browser and device checks' },
       ],
     },
     {
       id: 'tools',
-      label: 'Tools & DevOps',
-      command: 'stack --load tools-devops',
-      description: 'Version control, collaborative workflows, and continuous deployment platforms.',
+      label: 'Tools',
+      description: 'Daily editors, version control, and design-to-code workflow.',
       skills: [
-        { name: 'Git', icon: siGit, level: 4, note: 'Branching, merges & commit hygiene' },
-        { name: 'GitHub', icon: siGithub, level: 4, note: 'Remote repositories & GitHub Pages' },
-        { name: 'Vite', icon: siVite, level: 5, note: 'Blazing fast bundler & dev server' },
-        { name: 'VS Code', icon: null, level: 5, note: 'Primary IDE & development setup' },
-        { name: 'Figma', icon: siFigma, level: 4, note: 'UI/UX design translation to code' },
-        { name: 'Vercel', icon: siVercel, level: 4, note: 'Production web hosting & deployment' },
+        { name: 'Git', icon: siGit, tier: 'core', note: 'Branching, merges, and commit hygiene' },
+        { name: 'GitHub', icon: siGithub, tier: 'core', note: 'Remote repos and collaboration' },
+        { name: 'Vite', icon: siVite, tier: 'core', note: 'Dev server and production bundling' },
+        { name: 'VS Code', icon: null, tier: 'core', note: 'Primary editor and local setup' },
+        { name: 'Figma', icon: siFigma, tier: 'familiar', note: 'Reading UI and turning it into code' },
+      ],
+    },
+    {
+      id: 'deployment',
+      label: 'Deployment',
+      description: 'Where I publish sites after they are ready for people to use.',
+      skills: [
+        { name: 'Vercel', icon: siVercel, tier: 'familiar', note: 'Production hosting for web apps' },
+        { name: 'GitHub Pages', icon: siGithubpages, tier: 'familiar', note: 'Static site hosting from a repo' },
+        { name: 'Hostinger', icon: siHostinger, tier: 'familiar', note: 'Shared hosting and site updates' },
       ],
     },
   ],
 
-  // Nakabatay sa iyong target competencies at training
   learning: ['Java NC III SIL', 'Software QA Testing', 'TypeScript'],
 }

@@ -140,3 +140,25 @@ export const signatureReveal = {
     },
   },
 }
+
+export const skillRowStagger = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.04,
+    },
+  },
+}
+
+export const skillRowItem = {
+  hidden: { opacity: 0, y: 8, filter: 'blur(4px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.22,
+      ease: standardEase,
+    },
+  },
+}

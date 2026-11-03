@@ -2,168 +2,160 @@
 import { ref, computed } from 'vue'
 import { motion, AnimatePresence } from 'motion-v'
 import { skillsData } from '../data/skills'
-import SkillTerminal from './SkillTerminal.vue'
-import SkillModule from './SkillModule.vue'
-import SkillRadar from './SkillRadar.vue'
-import { blurWordReveal, standardEase } from '../lib/motion'
+import SkillTabs from './SkillTabs.vue'
+import SkillRow from './SkillRow.vue'
+import { blurWordReveal, skillRowStagger, standardEase } from '../lib/motion'
 
-// Active Category State
 const categories = skillsData.categories
-const activeCategoryId = ref(categories[0]?.id || 'frontend')
+const activeCategoryId = ref(categories[0]?.id || '')
 
 const activeCategory = computed(() => {
-  return categories.find(c => c.id === activeCategoryId.value) || categories[0]
+  return categories.find((c) => c.id === activeCategoryId.value) || categories[0] || {
+    id: 'empty',
+    label: '',
+    description: '',
+    skills: [],
+  }
 })
 
 const handleCategorySelect = (id) => {
   activeCategoryId.value = id
 }
+
+const headlineWords = [
+  { text: 'Tools', accent: false },
+  { text: 'I', accent: false },
+  { text: 'use', accent: false },
+  { text: 'to', accent: false },
+  { text: 'build', accent: false },
+  { text: 'things', accent: true },
+  { text: 'that', accent: false },
+  { text: 'work.', accent: false },
+]
 </script>
 
 <template>
   <section
     id="skills"
-    class="relative py-24 sm:py-28 md:py-36 scroll-mt-20 focus:outline-none overflow-hidden"
+    class="relative py-24 sm:py-28 md:py-36 scroll-mt-20 focus:outline-none"
   >
-    <!-- Background Ambient Glow & Subtle Grid -->
-    <div class="absolute top-1/4 -right-32 w-80 h-80 rounded-full bg-brand-orange/5 dark:bg-brand-orange/10 blur-3xl pointer-events-none -z-10" />
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
 
-    <!-- Section Eyebrow Label -->
-    <div class="mb-12 flex items-center gap-2">
-      <span class="font-mono text-xs sm:text-sm text-gray-500 dark:text-gray-400 tracking-wider">
-        // skills
-      </span>
-      <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
-    </div>
-
-    <!-- Main Responsive Grid: Sticky Left Column + Modules Grid on Right -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-      
-      <!-- LEFT COLUMN: Sticky Headline + Terminal + Radar (Desktop Sticky) -->
-      <div class="lg:col-span-5 flex flex-col space-y-8 lg:sticky lg:top-28">
-        
-        <!-- Headline in Instrument Serif Italic with Word Reveal -->
-        <h2 class="font-serif-accent italic text-3xl sm:text-4xl md:text-5xl text-gray-900 dark:text-white leading-[1.2] tracking-tight">
-          Tools I use to build
-          <span class="relative inline-block text-brand-orange font-normal not-italic sm:italic mx-1.5">
-            things
-            <!-- Subtle accent underline -->
-            <motion.svg
-              class="absolute -bottom-1 left-0 w-full h-1.5 text-brand-orange overflow-visible"
-              viewBox="0 0 100 8"
-              preserveAspectRatio="none"
-            >
-              <motion.path
-                d="M0 4 Q 50 8 100 4"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                :initial="{ pathLength: 0 }"
-                :while-in-view="{ pathLength: 1 }"
-                :viewport="{ once: true }"
-                :transition="{ duration: 0.8, delay: 0.3, ease: standardEase }"
-              />
-            </motion.svg>
+      <div class="lg:col-span-4 lg:sticky lg:top-28 space-y-6">
+        <div class="flex items-center gap-2">
+          <span class="font-mono text-xs sm:text-sm text-gray-400 dark:text-gray-400 tracking-wider">
+            // skills
           </span>
-          that work.
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
+        </div>
+
+        <h2 class="font-serif-accent italic text-3xl sm:text-4xl md:text-5xl text-gray-900 dark:text-white leading-[1.2] tracking-tight">
+          <motion.span
+            v-for="(word, index) in headlineWords"
+            :key="word.text"
+            :variants="blurWordReveal"
+            initial="hidden"
+            while-in-view="visible"
+            :viewport="{ once: true }"
+            :transition="{ delay: index * 0.06 }"
+            :class="[
+              'inline-block mr-[0.28em]',
+              word.accent ? 'text-brand-orange font-normal not-italic sm:italic' : '',
+            ]"
+          >
+            {{ word.text }}
+          </motion.span>
         </h2>
 
-        <!-- Interactive Terminal Component -->
-        <SkillTerminal
-          :categories="categories"
-          :active-id="activeCategoryId"
-          @select="handleCategorySelect"
-        />
+        <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-sans leading-relaxed max-w-sm">
+          A short index of the stack I reach for when building, checking, and shipping web work.
+        </p>
 
-        <!-- Pure SVG Dynamic Radar Component -->
-        <SkillRadar
+        <SkillTabs
           :categories="categories"
           :active-id="activeCategoryId"
           @select="handleCategorySelect"
         />
       </div>
 
-      <!-- RIGHT COLUMN: Active Modules Grid -->
-      <div class="lg:col-span-7 flex flex-col">
-        
-        <!-- Modules Grid Header & Counter -->
-        <div class="flex items-center justify-between pb-4 mb-6 border-b border-gray-200/50 dark:border-gray-800/80 font-mono">
-          <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
-            <span class="text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
-              Active Category: <strong class="text-gray-900 dark:text-white">{{ activeCategory.label }}</strong>
-            </span>
-          </div>
-
-          <!-- Module Count with Rolling Transition -->
-          <div class="flex items-center text-xs text-brand-orange font-semibold">
-            <AnimatePresence mode="wait">
-              <motion.span
-                :key="activeCategory.id"
-                :initial="{ y: 10, opacity: 0 }"
-                :animate="{ y: 0, opacity: 1 }"
-                :exit="{ y: -10, opacity: 0 }"
-                :transition="{ duration: 0.2 }"
+      <div class="lg:col-span-8 min-w-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            :key="activeCategory.id"
+            :id="`skill-panel-${activeCategory.id}`"
+            role="tabpanel"
+            :aria-labelledby="`skill-tab-${activeCategory.id}`"
+            :initial="{ opacity: 0, y: 8 }"
+            :animate="{ opacity: 1, y: 0 }"
+            :exit="{ opacity: 0, y: -8 }"
+            :transition="{ duration: 0.2, ease: standardEase }"
+          >
+            <div class="mb-6">
+              <h3 class="font-display text-2xl sm:text-3xl text-gray-900 dark:text-white tracking-tight">
+                {{ activeCategory.label }}
+              </h3>
+              <p
+                v-if="activeCategory.description"
+                class="mt-2 text-sm sm:text-base text-gray-500 dark:text-gray-400 font-sans leading-relaxed"
               >
-                {{ activeCategory.skills.length }}
-              </motion.span>
-            </AnimatePresence>
-            <span class="ml-1 text-gray-400 dark:text-gray-500">modules</span>
-          </div>
-        </div>
+                {{ activeCategory.description }}
+              </p>
+            </div>
 
-        <!-- Cards Container with AnimatePresence popLayout -->
-        <div class="min-h-[300px]">
-          <AnimatePresence mode="popLayout">
             <motion.div
-              :key="activeCategory.id"
-              :initial="{ opacity: 0, y: 16, filter: 'blur(4px)' }"
-              :animate="{ opacity: 1, y: 0, filter: 'blur(0px)' }"
-              :exit="{ opacity: 0, y: -16, filter: 'blur(4px)' }"
-              :transition="{ duration: 0.4, ease: standardEase }"
-              class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+              :variants="skillRowStagger"
+              initial="hidden"
+              while-in-view="visible"
+              :viewport="{ once: true, amount: 0.15 }"
+              class="min-h-[280px] grid grid-cols-1 sm:grid-cols-2 sm:gap-x-8 max-sm:[&>*:last-child]:border-b-0 sm:[&>*:nth-last-child(-n+2)]:border-b-0"
             >
-              <!-- Module Card Item -->
-              <SkillModule
-                v-for="(skill, index) in activeCategory.skills"
+              <SkillRow
+                v-for="skill in activeCategory.skills"
                 :key="skill.name"
                 :skill="skill"
-                :index="index"
               />
 
-              <!-- Empty State Fallback -->
-              <div
-                v-if="activeCategory.skills.length === 0"
-                class="col-span-full py-16 text-center rounded-xl border border-dashed border-gray-300 dark:border-gray-800 text-gray-400 dark:text-gray-500 font-mono text-xs"
+              <p
+                v-if="!activeCategory.skills.length"
+                class="col-span-full py-16 text-sm text-gray-400 dark:text-gray-500 font-sans"
               >
-                // no modules loaded in this directory yet
-              </div>
+                nothing here yet
+              </p>
             </motion.div>
-          </AnimatePresence>
-        </div>
 
-        <!-- Currently Learning Strip at the Bottom -->
+            <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[11px] font-mono text-gray-400 dark:text-gray-500">
+              <span class="inline-flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-brand-orange" aria-hidden="true" />
+                Core — used often
+              </span>
+              <span class="inline-flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full border border-gray-400/70 dark:border-gray-500" aria-hidden="true" />
+                Familiar — comfortable with
+              </span>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
         <div
-          v-if="skillsData.learning && skillsData.learning.length > 0"
-          class="mt-10 p-4 rounded-xl border border-gray-200/60 dark:border-gray-800/80 bg-white/60 dark:bg-brand-dark-surface/60 backdrop-blur-md flex flex-wrap items-center gap-3 font-mono text-xs"
+          v-if="skillsData.learning?.length"
+          class="mt-12 pt-8 border-t border-gray-200/70 dark:border-white/[0.08]"
         >
-          <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
-            <span class="w-2 h-2 rounded-full bg-brand-orange animate-ping"></span>
-            <span>Currently learning:</span>
-          </div>
-
-          <div class="flex flex-wrap items-center gap-2">
-            <span
-              v-for="item in skillsData.learning"
-              :key="item"
-              class="px-2.5 py-1 rounded-md bg-brand-orange/10 dark:bg-brand-orange/15 border border-brand-orange/30 text-brand-orange font-medium text-[11px]"
-            >
-              {{ item }}
+          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-2">
+            <span class="inline-flex items-center gap-2 font-serif-accent italic text-lg text-gray-900 dark:text-white">
+              <span class="relative flex h-1.5 w-1.5" aria-hidden="true">
+                <span class="absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-60 animate-pulse"></span>
+                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-orange"></span>
+              </span>
+              Currently learning
             </span>
+            <p class="text-sm text-gray-500 dark:text-gray-400 font-sans">
+              <template v-for="(item, index) in skillsData.learning" :key="item">
+                <span>{{ item }}</span>
+                <span v-if="index < skillsData.learning.length - 1" class="mx-2 text-gray-300 dark:text-gray-600">/</span>
+              </template>
+            </p>
           </div>
         </div>
-
       </div>
 
     </div>
