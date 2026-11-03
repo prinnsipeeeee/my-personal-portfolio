@@ -1,0 +1,23 @@
+---
+description: Context at conventions ng personal portfolio
+alwaysApply: true
+---
+
+# Personal Portfolio
+
+- Stack: Vite + Vue 3 (Composition API, <script setup>) + Tailwind CSS
+- Animations: motion-v (hindi Framer Motion). Reusable values sa src/lib/motion.js
+- Icons: simple-icons (inline SVG, currentColor)
+- Theme: minimalist, dark blue + orange accent, may dark at light mode
+- Fonts: Space Grotesk (headings), Inter (body), JetBrains Mono (maliliit na label lang), Instrument Serif italic (headline accent)
+- Sections: Navbar, Hero, About, Skills, Projects, Experience, Contact, Footer
+- Ang bawat section ay may `// label`, serif italic headline na may isang orange na salita, at mahinahong motion
+- Data ng content ay nasa src/data/, hindi hardcoded sa components
+- Igalang ang reduced motion, dark/light mode, at mobile (375px)
+- Huwag galawin ang ibang sections maliban kung hiningi
+
+## Git
+- Diretso sa main, walang branches
+- Commit message: isang linya, hindi lalampas sa 60 characters, walang body
+- Format: feat:, fix:, refactor:, style:, docs:
+- Huwag i-commit ang personal info (phone, address, ID numbers)
