@@ -1,119 +1,88 @@
 /**
- * =======================================================================
- * PROJECTS DATA CONFIGURATION
- * =======================================================================
- * Gabay:
- * - Madaling magdagdag/magbawas: maglagay lang ng bagong object sa array.
- * - Bawat project ay may array ng `images` para sa in-modal carousel.
- * - Palitan ang `liveUrl` at `githubUrl` ng iyong totoong links.
- * =======================================================================
+ * Work / Projects Data
+ *
+ * Paano i-edit:
+ * - Palitan ang mga placeholder na may `// EDIT ME` ng totoong detalye at screenshots mo.
+ * - `type`: gamitin ang `'landing'` para sa React landing pages o `'system'` para sa web systems.
+ * - Kung blangko ang `image`, `live`, o `repo` (`''`), awtomatiko itong itatago nang hindi nasisira ang layout.
+ * - Panatilihing nauuna ang `'landing'` projects para malinaw ang front-end focus.
  */
+
+import landing1Img from '../assets/projects/landing-1.svg'
+import landing2Img from '../assets/projects/landing-2.svg'
+import landing3Img from '../assets/projects/landing-3.svg'
+import system1Img from '../assets/projects/system-1.svg'
+import system2Img from '../assets/projects/system-2.svg'
 
 export const projectsData = [
   {
-    id: 'e-commerce-platform',
-    title: 'Modern E-Commerce Store',
-    category: 'Full-Stack Web App',
-    tagline: 'High-performance storefront with real-time cart, checkout, and inventory management.',
-    description: 'A full-featured responsive e-commerce web application featuring dynamic product catalog filtering, cart state persistence, secure mock checkout flow, and dark/light responsive interface design.',
-    tags: ['Vue 3', 'Tailwind CSS', 'Vite', 'Supabase', 'REST API'],
+    id: 'project-landing-01',
+    title: 'Project Title — Brand Launch Landing Page', // EDIT ME
+    type: 'landing',
+    role: 'Front-End Developer', // EDIT ME
+    year: '2026', // EDIT ME
+    stack: ['React', 'Tailwind CSS', 'Vite', 'Motion'], // EDIT ME
+    description:
+      'Placeholder description for a conversion-focused React landing page featuring responsive grid choreography, semantic markup, fast initial paint, and accessible keyboard navigation.', // EDIT ME
+    image: landing1Img, // EDIT ME: Palitan ng screenshot path o imported image
+    live: 'https://example.com/landing-01', // EDIT ME: Ilagay ang live URL o '' kung wala
+    repo: 'https://github.com/prinnsipeeeee', // EDIT ME: Ilagay ang repo URL o '' kung private
     featured: true,
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/prinnsipeeeee',
-    images: [
-      'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80',
-    ],
-    features: [
-      'Real-time state management for persistent shopping carts',
-      'Responsive mobile-first navigation and layout',
-      'Instant search and category-based filtering',
-      'Secure backend integration with database persistence'
-    ],
   },
   {
-    id: 'task-management-dashboard',
-    title: 'Productivity Task Hub',
-    category: 'Web Application',
-    tagline: 'Collaborative task planner with drag-and-drop boards and analytics.',
-    description: 'An interactive productivity dashboard enabling users to organize milestones, track development tickets, monitor project completion rates, and manage priorities with clean visual boards.',
-    tags: ['React.js', 'Tailwind CSS', 'Firebase', 'JavaScript'],
+    id: 'project-landing-02',
+    title: 'Project Title — SaaS Product Showcase', // EDIT ME
+    type: 'landing',
+    role: 'Front-End Developer', // EDIT ME
+    year: '2026', // EDIT ME
+    stack: ['React', 'Tailwind CSS', 'Lucide Icons', 'Vite'], // EDIT ME
+    description:
+      'Placeholder description for a modular SaaS marketing page built with reusable React sections, responsive pricing comparisons, and lightweight motion transitions tuned for mobile devices.', // EDIT ME
+    image: landing2Img, // EDIT ME
+    live: 'https://example.com/landing-02', // EDIT ME
+    repo: 'https://github.com/prinnsipeeeee', // EDIT ME
     featured: true,
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/prinnsipeeeee',
-    images: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1200&q=80',
-    ],
-    features: [
-      'Kanban board layout with priority color tags',
-      'Real-time database sync for status updates',
-      'Productivity completion statistics and charts',
-      'Lightweight client-side performance'
-    ],
   },
   {
-    id: 'restaurant-booking-system',
-    title: 'Gourmet Table Booking',
-    category: 'Client Website',
-    tagline: 'Interactive culinary landing page with table reservation system.',
-    description: 'A bespoke modern restaurant website designed to present menu specialties, showcase high-resolution culinary photography, and facilitate seamless reservation bookings for diners.',
-    tags: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'MySQL'],
+    id: 'project-landing-03',
+    title: 'Project Title — Editorial Studio Site', // EDIT ME
+    type: 'landing',
+    role: 'Front-End Developer', // EDIT ME
+    year: '2025', // EDIT ME
+    stack: ['React', 'Tailwind CSS', 'Motion', 'HTML/CSS'], // EDIT ME
+    description:
+      'Placeholder description for a minimalist editorial landing site emphasizing clean typography hierarchy, high-contrast monochrome surfaces, and smooth section anchoring.', // EDIT ME
+    image: landing3Img, // EDIT ME
+    live: 'https://example.com/landing-03', // EDIT ME
+    repo: '', // EDIT ME: Halimbawa ng project na walang public repo (kusang itatago ang Code link)
     featured: false,
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/prinnsipeeeee',
-    images: [
-      'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80',
-    ],
-    features: [
-      'Interactive date & seating reservation picker',
-      'Dynamic menu section with dietary filters',
-      'Optimized asset loading for rapid page speed',
-      'Fully responsive mobile dining experience'
-    ],
   },
   {
-    id: 'developer-portfolio-template',
-    title: 'Minimalist Developer Portfolio',
-    category: 'Portfolio / UI',
-    tagline: 'Typography-driven portfolio showcase built for creative engineers.',
-    description: 'A clean, high-performance developer portfolio template emphasizing typography, subtle ambient motion, responsive dark/light theme switching, and interactive component showcases.',
-    tags: ['Vue 3', 'Tailwind CSS', 'Motion-v', 'Vite'],
+    id: 'project-system-01',
+    title: 'Project Title — Client Booking & Portal System', // EDIT ME
+    type: 'system',
+    role: 'Front-End Developer', // EDIT ME
+    year: '2026', // EDIT ME
+    stack: ['React', 'Tailwind CSS', 'Supabase', 'REST API'], // EDIT ME
+    description:
+      'Placeholder description for a compact web system allowing staff to track client bookings, filter records, and manage schedules with a clean, responsive dashboard UI.', // EDIT ME
+    image: system1Img, // EDIT ME
+    live: 'https://example.com/system-01', // EDIT ME
+    repo: 'https://github.com/prinnsipeeeee', // EDIT ME
     featured: false,
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/prinnsipeeeee',
-    images: [
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1200&q=80',
-    ],
-    features: [
-      'Single-page architecture with smooth anchor scrolling',
-      'System-preferred dark and light mode synchronization',
-      'Interactive HUD terminal and radar components',
-      'Touch-friendly mobile drawer and controls'
-    ],
   },
   {
-    id: 'qa-bug-tracker-suite',
-    title: 'QA Bug & Defect Tracker',
-    category: 'Quality Assurance Tool',
-    tagline: 'Streamlined issue logging and testing workflow verification tool.',
-    description: 'A testing and defect tracking utility tailored for software quality assurance, enabling testers to record test cases, document reproduce steps, log severity, and track resolution lifecycles.',
-    tags: ['Java', 'MySQL', 'PHP', 'Manual Testing'],
+    id: 'project-system-02',
+    title: 'Project Title — Issue & QA Tracking Workspace', // EDIT ME
+    type: 'system',
+    role: 'Front-End & Manual QA', // EDIT ME
+    year: '2025', // EDIT ME
+    stack: ['React', 'JavaScript', 'MySQL', 'PHP'], // EDIT ME
+    description:
+      'Placeholder description for an internal web system designed for logging functional test cases, tracking bug status, and reviewing release readiness across browsers.', // EDIT ME
+    image: system2Img, // EDIT ME
+    live: '', // EDIT ME: Halimbawa ng internal system na walang public live link
+    repo: 'https://github.com/prinnsipeeeee', // EDIT ME
     featured: false,
-    liveUrl: 'https://example.com',
-    githubUrl: 'https://github.com/prinnsipeeeee',
-    images: [
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80',
-    ],
-    features: [
-      'Structured defect reporting with severity rankings',
-      'Test case execution status tracking',
-      'Database logging and relational record management',
-      'Designed for QA workflow efficiency'
-    ],
   },
 ]

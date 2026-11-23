@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#121212"/>
+  <rect x="28" y="24" width="744" height="452" stroke="#ffffff" stroke-opacity="0.16"/>
+  <rect x="200" y="90" width="400" height="28" fill="#ffffff" fill-opacity="0.86"/>
+  <rect x="260" y="130" width="280" height="14" fill="#ffffff" fill-opacity="0.32"/>
+  <rect x="336" y="166" width="128" height="30" fill="#ffffff" fill-opacity="0.9"/>
+  <rect x="64" y="236" width="208" height="170" stroke="#ffffff" stroke-opacity="0.22"/>
+  <rect x="296" y="236" width="208" height="170" stroke="#ffffff" stroke-opacity="0.45"/>
+  <rect x="528" y="236" width="208" height="170" stroke="#ffffff" stroke-opacity="0.22"/>
+  <rect x="84" y="262" width="90" height="12" fill="#ffffff" fill-opacity="0.6"/>
+  <rect x="316" y="262" width="110" height="12" fill="#ffffff" fill-opacity="0.9"/>
+  <rect x="548" y="262" width="90" height="12" fill="#ffffff" fill-opacity="0.6"/>
+  <text x="52" y="448" fill="#ffffff" fill-opacity="0.45" font-family="monospace" font-size="13">02 / SAAS PRODUCT LANDING PREVIEW</text>
+</svg>

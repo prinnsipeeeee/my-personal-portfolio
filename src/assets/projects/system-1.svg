@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+  <rect width="800" height="500" fill="#101010"/>
+  <rect x="28" y="24" width="744" height="452" stroke="#ffffff" stroke-opacity="0.16"/>
+  <line x1="196" y1="24" x2="196" y2="476" stroke="#ffffff" stroke-opacity="0.16"/>
+  <rect x="50" y="54" width="110" height="14" fill="#ffffff" fill-opacity="0.7"/>
+  <rect x="50" y="96" width="120" height="10" fill="#ffffff" fill-opacity="0.24"/>
+  <rect x="50" y="120" width="104" height="10" fill="#ffffff" fill-opacity="0.24"/>
+  <rect x="50" y="144" width="116" height="10" fill="#ffffff" fill-opacity="0.6"/>
+  <rect x="228" y="54" width="160" height="84" stroke="#ffffff" stroke-opacity="0.22"/>
+  <rect x="404" y="54" width="160" height="84" stroke="#ffffff" stroke-opacity="0.22"/>
+  <rect x="580" y="54" width="160" height="84" stroke="#ffffff" stroke-opacity="0.22"/>
+  <rect x="228" y="164" width="512" height="240" stroke="#ffffff" stroke-opacity="0.22"/>
+  <line x1="228" y1="208" x2="740" y2="208" stroke="#ffffff" stroke-opacity="0.16"/>
+  <line x1="228" y1="256" x2="740" y2="256" stroke="#ffffff" stroke-opacity="0.1"/>
+  <line x1="228" y1="304" x2="740" y2="304" stroke="#ffffff" stroke-opacity="0.1"/>
+  <line x1="228" y1="352" x2="740" y2="352" stroke="#ffffff" stroke-opacity="0.1"/>
+  <text x="228" y="448" fill="#ffffff" fill-opacity="0.45" font-family="monospace" font-size="13">04 / OPERATIONS WEB SYSTEM PREVIEW</text>
+</svg>
