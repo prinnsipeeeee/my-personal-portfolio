@@ -1,41 +1,45 @@
 /**
- * =======================================================================
- * EXPERIENCE & EDUCATION DATA CONFIGURATION
- * =======================================================================
- * Gabay:
- * - `experience`: Trabaho, internship, o project work mula sa CV.
- * - `education`: Paaralan, degree, at opsyonal na `note`.
- * - `certifications`: Mga sertipikasyon at competency trainings.
- * - Format ng petsa: "YYYY-MM". Kung kasalukuyan pa, ilagay ang `end: null`.
- * - Ang tagal (duration) at "Present" ay awtomatikong kinakalkula.
- * =======================================================================
+ * Experience, Education, and Certifications Data
+ *
+ * Paano i-edit:
+ * - Magdagdag o magbawas ng entry sa `experience`, `education`, o `certifications`.
+ * - Format ng petsa: "YYYY-MM". Ilagay ang `end: null` kung kasalukuyan pa.
+ * - Awtomatikong inaayos mula pinakabago at kinukuwenta ang tagal (duration).
+ * - Palitan ang mga linyang may `// EDIT ME` kung may update o kulang na detalye.
  */
 
-// Helper: Formatter ng buwan at taon (hal. "Jun 2026")
 export const formatPeriodDate = (dateStr) => {
   if (!dateStr) return 'Present'
-  const [year, month] = dateStr.split('-')
-  const date = new Date(parseInt(year, 10), parseInt(month, 10) - 1)
+  const parts = String(dateStr).split('-')
+  if (parts.length < 2) return dateStr
+  const year = parseInt(parts[0], 10)
+  const month = parseInt(parts[1], 10)
+  if (Number.isNaN(year) || Number.isNaN(month) || month < 1 || month > 12) return dateStr
+  const date = new Date(year, month - 1, 1)
   return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 }
 
-// Helper: Pagkuwenta ng tagal (hal. "6 mos" o "1 yr 4 mos")
-export const calculateDuration = (startStr, endStr) => {
+export const calculateDuration = (startStr, endStr, referenceDate = new Date()) => {
   if (!startStr) return ''
-  const [sYear, sMonth] = startStr.split('-').map(Number)
-  const start = new Date(sYear, sMonth - 1)
-  
-  let end
+  const [sYear, sMonth] = String(startStr).split('-').map(Number)
+  if (Number.isNaN(sYear) || Number.isNaN(sMonth)) return ''
+
+  let eYear
+  let eMonth
   if (endStr) {
-    const [eYear, eMonth] = endStr.split('-').map(Number)
-    end = new Date(eYear, eMonth)
+    const parsed = String(endStr).split('-').map(Number)
+    eYear = parsed[0]
+    eMonth = parsed[1]
+    if (Number.isNaN(eYear) || Number.isNaN(eMonth)) return ''
   } else {
-    end = new Date()
+    eYear = referenceDate.getFullYear()
+    eMonth = referenceDate.getMonth() + 1
   }
 
-  const totalMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth())
-  if (totalMonths <= 0) return '1 mo'
-  
+  // Inclusive month count (e.g., 2026-06 to 2026-11 = 6 mos; 2026-06 to 2026-06 = 1 mo)
+  const totalMonths = (eYear - sYear) * 12 + (eMonth - sMonth) + 1
+  if (totalMonths <= 1) return '1 mo'
+
   const years = Math.floor(totalMonths / 12)
   const months = totalMonths % 12
 
@@ -44,35 +48,44 @@ export const calculateDuration = (startStr, endStr) => {
   return `${years} ${years === 1 ? 'yr' : 'yrs'} ${months} ${months === 1 ? 'mo' : 'mos'}`
 }
 
+export const sortEntriesNewestFirst = (entries = []) => {
+  return [...entries].sort((a, b) => {
+    const aCurrent = a.end === null || a.end === undefined
+    const bCurrent = b.end === null || b.end === undefined
+    if (aCurrent !== bCurrent) return aCurrent ? -1 : 1
+    const aKey = a.start || a.year || ''
+    const bKey = b.start || b.year || ''
+    return String(bKey).localeCompare(String(aKey))
+  })
+}
+
 export const experienceData = {
-  // Trabaho at Professional Experience mula sa CV
   experience: [
     {
       id: 'part-time-frontend-dev',
       role: 'Part-Time Front-End Developer',
-      company: 'Client & Web Projects', // Walang partikular na company name sa CV
+      company: 'Client & Web Projects', // EDIT ME: Palitan ng totoong company name kung meron
       location: 'Philippines',
       type: 'Part-time',
       start: '2026-06',
-      end: '2026-11',
+      end: '2026-11', // EDIT ME: Gawing `null` kung kasalukuyan pa
       highlights: [
         'Developed and maintained responsive websites using modern front-end technologies.',
         'Converted UI designs and project requirements into functional, user-friendly interfaces.',
-        'Tested and debugged website components to improve functionality and usability.',
+        'Tested and debugged website components across desktop, tablet, and mobile devices.',
       ],
-      tech: ['HTML5', 'CSS3', 'JavaScript', 'Vue.js', 'React.js', 'Tailwind CSS'],
+      tech: ['HTML5', 'CSS3', 'JavaScript', 'React.js', 'Vue.js', 'Tailwind CSS'],
     },
   ],
 
-  // Edukasyon mula sa CV
   education: [
     {
       id: 'bsit-informatics',
       school: 'Informatics College – Manila',
       degree: 'Bachelor of Science in Information Technology',
       start: '2026-08',
-      end: null, // "Present" sa CV
-      note: 'Undergraduate studies focused on IT and software development.',
+      end: null,
+      note: 'Undergraduate studies focused on IT and front-end web development.', // EDIT ME
     },
     {
       id: 'bscoe-urs',
@@ -84,11 +97,10 @@ export const experienceData = {
     },
   ],
 
-  // Certifications & Trainings mula sa CV
   certifications: [
     {
       id: 'java-nc3-sil',
-      name: 'Certificate of Enterprise Training Completion — Supervised Industry Learning (SIL) in Programming (Java) NC III',
+      name: 'Supervised Industry Learning (SIL) — Programming (Java) NC III',
       issuer: 'SpringValleyTech Corp.',
       year: '2026',
       note: '120 Training Hours (May 2026)',

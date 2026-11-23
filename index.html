@@ -2,12 +2,22 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/assets/logo_1.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Prince Peñaflor</title>
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/png" href="%SITE_FAVICON%" />
+    <title>%SITE_TITLE%</title>
+    <meta name="description" content="%SITE_DESCRIPTION%" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="%SITE_TITLE%" />
+    <meta property="og:description" content="%SITE_DESCRIPTION%" />
+    <meta property="og:image" content="%SITE_OG_IMAGE%" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="%SITE_TITLE%" />
+    <meta name="twitter:description" content="%SITE_DESCRIPTION%" />
+    <meta name="twitter:image" content="%SITE_OG_IMAGE%" />
   </head>
-  <body class="bg-white text-gray-900 dark:bg-brand-dark dark:text-gray-100 transition-colors duration-300">
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

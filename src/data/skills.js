@@ -1,11 +1,10 @@
 /**
- * Skills data — Stack Index
+ * Skills Data
  *
  * Paano i-edit:
- * - Magdagdag ng category: mag-push ng object sa `categories` (id, label, description, skills[]). Max 6 categories.
- * - Magbawas: tanggalin ang category o skill object. Ang tab count ay automatic.
- * - Palitan ang skill: i-edit ang `name`, `icon` (simple-icons export o `null` para sa initials), `tier` (`core` | `familiar`), at `note` (1 linya, ~60 chars).
- * - Currently learning: i-edit ang `learning` array. Walang personal info dito.
+ * - Magdagdag o magbawas ng group sa `groups` (Core, Tooling, Also work with, Currently learning).
+ * - Bawat skill ay may `name`, `icon` (export mula sa `simple-icons` o `null` para sa initials fallback), at `note`.
+ * - Palitan ang mga linyang may `// EDIT ME` kung may update ka sa stack mo.
  */
 
 import {
@@ -15,9 +14,11 @@ import {
   siReact,
   siVuedotjs,
   siTailwindcss,
-  siOpenjdk,
+  siNodedotjs,
+  siExpress,
   siPhp,
   siPython,
+  siOpenjdk,
   siMysql,
   siFirebase,
   siSupabase,
@@ -31,75 +32,64 @@ import {
 } from 'simple-icons'
 
 export const skillsData = {
-  categories: [
+  groups: [
     {
-      id: 'frontend',
-      label: 'Frontend',
-      description: 'Interfaces I actually ship: markup, layout, and component UI.',
+      id: 'core',
+      label: 'Core',
+      emphasis: 'primary',
+      description: 'Primary front-end tools I use to ship responsive React landing pages and clean UI.', // EDIT ME
       skills: [
-        { name: 'HTML5', icon: siHtml5, tier: 'core', note: 'Semantic markup and accessible structure' },
-        { name: 'CSS3', icon: siCss, tier: 'core', note: 'Responsive layouts with Flexbox and Grid' },
-        { name: 'JavaScript', icon: siJavascript, tier: 'core', note: 'DOM, ES6+, and async client logic' },
-        { name: 'React.js', icon: siReact, tier: 'familiar', note: 'Components, hooks, and shared state' },
-        { name: 'Vue.js', icon: siVuedotjs, tier: 'core', note: 'Composition API and reactive UI' },
-        { name: 'Tailwind CSS', icon: siTailwindcss, tier: 'core', note: 'Utility-first interface styling' },
+        { name: 'React', icon: siReact, note: 'Landing pages, modular components, and hooks' }, // EDIT ME
+        { name: 'JavaScript', icon: siJavascript, note: 'ES6+, DOM interaction, and async client flows' },
+        { name: 'HTML5', icon: siHtml5, note: 'Semantic markup, SEO structure, and accessibility' },
+        { name: 'CSS3', icon: siCss, note: 'Responsive Flexbox, CSS Grid, and fluid typography' },
+        { name: 'Tailwind CSS', icon: siTailwindcss, note: 'Design tokens and rapid utility styling' },
       ],
     },
     {
-      id: 'languages',
-      label: 'Languages',
-      description: 'Languages I use beyond the browser for logic and training.',
+      id: 'tooling',
+      label: 'Tooling',
+      emphasis: 'standard',
+      description: 'Build tools, version control, design handoff, and deployment workflow.', // EDIT ME
       skills: [
-        { name: 'Java', icon: siOpenjdk, tier: 'familiar', note: 'NC III training and object-oriented code' },
-        { name: 'PHP', icon: siPhp, tier: 'familiar', note: 'Server-side scripting and data handling' },
-        { name: 'Python', icon: siPython, tier: 'familiar', note: 'Scripting, algorithms, and automation' },
+        { name: 'Vite', icon: siVite, note: 'Fast local dev server and optimized bundling' },
+        { name: 'Git', icon: siGit, note: 'Clean commits, branching, and version hygiene' },
+        { name: 'GitHub', icon: siGithub, note: 'Repositories, collaboration, and CI workflows' },
+        { name: 'Figma', icon: siFigma, note: 'Translating design specs into pixel-accurate UI' },
+        { name: 'VS Code', icon: null, note: 'Primary code editor and debugging environment' },
+        { name: 'Vercel', icon: siVercel, note: 'Zero-config production deployment for front-end apps' },
+        { name: 'GitHub Pages', icon: siGithubpages, note: 'Static site hosting directly from Git repos' },
+        { name: 'Hostinger', icon: siHostinger, note: 'Client hosting setup and routine updates' },
       ],
     },
     {
-      id: 'database',
-      label: 'Database',
-      description: 'Stores and backend services I have used in student and client work.',
+      id: 'also-work-with',
+      label: 'Also work with',
+      emphasis: 'secondary',
+      description: 'Secondary web systems, backend, database, and QA fundamentals.', // EDIT ME
       skills: [
-        { name: 'MySQL', icon: siMysql, tier: 'familiar', note: 'Relational schemas and SQL queries' },
-        { name: 'Firebase', icon: siFirebase, tier: 'familiar', note: 'Realtime NoSQL store and hosting' },
-        { name: 'Supabase', icon: siSupabase, tier: 'familiar', note: 'Postgres backend, auth, and realtime' },
+        { name: 'Vue.js', icon: siVuedotjs, note: 'Composition API experience on client work' },
+        { name: 'Node.js', icon: siNodedotjs, note: 'JavaScript runtime and API integration' }, // EDIT ME
+        { name: 'Express', icon: siExpress, note: 'Lightweight REST endpoints for web systems' }, // EDIT ME
+        { name: 'Supabase', icon: siSupabase, note: 'Postgres database, auth, and realtime data' },
+        { name: 'MySQL', icon: siMysql, note: 'Relational schema design and SQL queries' },
+        { name: 'Firebase', icon: siFirebase, note: 'Cloud Firestore and quick client hosting' },
+        { name: 'PHP', icon: siPhp, note: 'Server-side scripting for legacy web systems' },
+        { name: 'Java', icon: siOpenjdk, note: 'NC III competency training and OOP foundations' },
+        { name: 'Python', icon: siPython, note: 'Scripting and problem-solving fundamentals' },
+        { name: 'Manual Testing & QA', icon: null, note: 'Functional testing, bug reporting, and cross-browser checks' },
       ],
     },
     {
-      id: 'testing',
-      label: 'Testing & QA',
-      description: 'How I check that a build actually works before it ships.',
+      id: 'learning',
+      label: 'Currently learning',
+      emphasis: 'compact',
+      description: 'Areas I am actively deepening to write more resilient interfaces.', // EDIT ME
       skills: [
-        { name: 'Manual Testing', icon: null, tier: 'familiar', note: 'Test cases and verification' },
-        { name: 'Functional Testing', icon: null, tier: 'familiar', note: 'Feature flows and UX checks' },
-        { name: 'Bug Identification', icon: null, tier: 'familiar', note: 'Defect logging and troubleshooting' },
-        { name: 'Debugging', icon: null, tier: 'familiar', note: 'Isolating and fixing broken behavior' },
-        { name: 'Quality Assurance', icon: null, tier: 'familiar', note: 'Cross-browser and device checks' },
-      ],
-    },
-    {
-      id: 'tools',
-      label: 'Tools',
-      description: 'Daily editors, version control, and design-to-code workflow.',
-      skills: [
-        { name: 'Git', icon: siGit, tier: 'core', note: 'Branching, merges, and commit hygiene' },
-        { name: 'GitHub', icon: siGithub, tier: 'core', note: 'Remote repos and collaboration' },
-        { name: 'Vite', icon: siVite, tier: 'core', note: 'Dev server and production bundling' },
-        { name: 'VS Code', icon: null, tier: 'core', note: 'Primary editor and local setup' },
-        { name: 'Figma', icon: siFigma, tier: 'familiar', note: 'Reading UI and turning it into code' },
-      ],
-    },
-    {
-      id: 'deployment',
-      label: 'Deployment',
-      description: 'Where I publish sites after they are ready for people to use.',
-      skills: [
-        { name: 'Vercel', icon: siVercel, tier: 'familiar', note: 'Production hosting for web apps' },
-        { name: 'GitHub Pages', icon: siGithubpages, tier: 'familiar', note: 'Static site hosting from a repo' },
-        { name: 'Hostinger', icon: siHostinger, tier: 'familiar', note: 'Shared hosting and site updates' },
+        { name: 'TypeScript', icon: null, note: 'Static typing for scalable React codebases' }, // EDIT ME
+        { name: 'Automated UI Testing', icon: null, note: 'Playwright end-to-end and accessibility testing' }, // EDIT ME
+        { name: 'Web Performance', icon: null, note: 'Core Web Vitals, bundle optimization, and rendering' }, // EDIT ME
       ],
     },
   ],
-
-  learning: ['Java NC III SIL', 'Software QA Testing', 'TypeScript'],
 }
