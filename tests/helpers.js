@@ -178,16 +178,27 @@ export async function mockGitHubAPIs(page, { mode = 'success' } = {}) {
  * @param {{ include?: string, exclude?: string[] }} [options]
  */
 export async function runAxeScan(page, options = {}) {
-  // Wait for finite entrance animations (fade-ins) to settle so contrast checks measure final opacity
-  await page.evaluate(async () => {
-    const animations = document
-      .getAnimations()
-      .filter((a) => a.effect?.getComputedTiming?.().iterations !== Infinity)
-    await Promise.race([
-      Promise.allSettled(animations.map((a) => a.finished)),
-      new Promise((r) => setTimeout(r, 800)),
-    ])
-  })
+  // Wait for motion/react fade-in animations (including delayed reveals) in viewport to reach opacity: 1
+  await page
+    .waitForFunction(
+      (includeSelector) => {
+        const root = includeSelector ? document.querySelector(includeSelector) : document
+        if (!root) return true
+        const vh = window.innerHeight
+        const nodes = root.querySelectorAll('[style*="opacity"]')
+        for (const el of nodes) {
+          const rect = el.getBoundingClientRect()
+          const op = parseFloat(getComputedStyle(el).opacity)
+          const inViewport = rect.height > 0 && rect.bottom > 0 && rect.top < vh
+          if (inViewport && op < 0.99) return false
+          if (op > 0.01 && op < 0.99) return false
+        }
+        return true
+      },
+      options.include || null,
+      { timeout: 3000 }
+    )
+    .catch(() => {})
 
   let builder = new AxeBuilder({ page })
   if (options.include) builder = builder.include(options.include)
