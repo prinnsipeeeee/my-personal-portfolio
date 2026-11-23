@@ -4,6 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var isDark = stored === 'dark' || (stored !== 'light' && systemDark);
+          document.documentElement.classList.toggle('dark', isDark);
+          var meta = document.querySelector('meta[name="color-scheme"]');
+          if (meta) {
+            meta.setAttribute('content', stored === 'dark' || stored === 'light' ? stored : 'light dark');
+          }
+        } catch (e) {
+          var fallbackDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', fallbackDark);
+        }
+      })();
+    </script>
     <link rel="icon" type="image/png" href="%SITE_FAVICON%" />
     <title>%SITE_TITLE%</title>
     <meta name="description" content="%SITE_DESCRIPTION%" />
