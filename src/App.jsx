@@ -7,11 +7,7 @@ import About from './components/About'
 import Stack from './components/Stack'
 import Work from './components/Work'
 import Experience from './components/Experience'
-import { profileData } from './data/profile'
-
-const REMAINING_SECTIONS = profileData.navLinks.filter(
-  (item) => !['home', 'about', 'stack', 'work', 'experience'].includes(item.id)
-)
+import GitHubActivity from './components/GitHubActivity'
 
 export default function App() {
   return (
@@ -23,19 +19,17 @@ export default function App() {
           <Stack />
           <Work />
           <Experience />
-          {REMAINING_SECTIONS.map((item) => (
-            <Section
-              key={item.id}
-              id={item.id}
-              label={`${item.num} — ${item.label.toLowerCase()}`}
-              heading={item.label}
-              className="min-h-[60vh]"
-            >
-              <p className="font-mono text-xs text-muted">
-                Section placeholder: #{item.id}
-              </p>
-            </Section>
-          ))}
+          <GitHubActivity />
+          <Section
+            id="contact"
+            label="07 — contact"
+            heading="Contact"
+            className="min-h-[60vh]"
+          >
+            <p className="font-mono text-xs text-muted">
+              Section placeholder: #contact
+            </p>
+          </Section>
         </Layout>
       </ThemeProvider>
     </MotionConfig>
