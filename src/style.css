@@ -117,6 +117,25 @@
   .skip-link:focus {
     transform: translateY(0);
   }
+
+  /* Monochrome giant outline lettering for editorial footer */
+  .footer-outline-letter {
+    color: transparent;
+    -webkit-text-stroke: 1.25px var(--border-strong);
+    transition: color 200ms ease, -webkit-text-stroke-color 200ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .footer-outline-letter:hover {
+      color: var(--fg);
+      -webkit-text-stroke-color: var(--fg);
+    }
+  }
+
+  .footer-giant-fade {
+    -webkit-mask-image: linear-gradient(to bottom, #000 35%, rgba(0, 0, 0, 0.2) 100%);
+    mask-image: linear-gradient(to bottom, #000 35%, rgba(0, 0, 0, 0.2) 100%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
