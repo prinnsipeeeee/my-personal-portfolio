@@ -6,10 +6,11 @@ import Home from './components/Home'
 import About from './components/About'
 import Stack from './components/Stack'
 import Work from './components/Work'
+import Experience from './components/Experience'
 import { profileData } from './data/profile'
 
 const REMAINING_SECTIONS = profileData.navLinks.filter(
-  (item) => !['home', 'about', 'stack', 'work'].includes(item.id)
+  (item) => !['home', 'about', 'stack', 'work', 'experience'].includes(item.id)
 )
 
 export default function App() {
@@ -21,13 +22,13 @@ export default function App() {
           <About />
           <Stack />
           <Work />
-          {REMAINING_SECTIONS.map((item, idx) => (
+          <Experience />
+          {REMAINING_SECTIONS.map((item) => (
             <Section
               key={item.id}
               id={item.id}
               label={`${item.num} — ${item.label.toLowerCase()}`}
               heading={item.label}
-              texture={idx % 2 === 0 ? 'dots' : 'none'}
               className="min-h-[60vh]"
             >
               <p className="font-mono text-xs text-muted">
