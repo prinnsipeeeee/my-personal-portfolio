@@ -1,23 +1,24 @@
 ---
-description: Context at conventions ng personal portfolio
+description: Context at conventions ng personal portfolio (React monochrome edition)
 alwaysApply: true
 ---
 
 # Personal Portfolio
 
-- Stack: Vite + Vue 3 (Composition API, <script setup>) + Tailwind CSS
-- Animations: motion-v (hindi Framer Motion). Reusable values sa src/lib/motion.js
-- Icons: simple-icons (inline SVG, currentColor)
-- Theme: minimalist, dark blue + orange accent, may dark at light mode
-- Fonts: Space Grotesk (headings), Inter (body), JetBrains Mono (maliliit na label lang), Instrument Serif italic (headline accent)
-- Sections: Navbar, Hero, About, Skills, Projects, Experience, Contact, Footer
-- Ang bawat section ay may `// label`, serif italic headline na may isang orange na salita, at mahinahong motion
-- Data ng content ay nasa src/data/, hindi hardcoded sa components
-- Igalang ang reduced motion, dark/light mode, at mobile (375px)
-- Huwag galawin ang ibang sections maliban kung hiningi
+- Focus: Front-End Web Developer (pangunahing focus: React landing pages, UI craft, responsive, performance, accessibility; pangalawa: web systems at manual QA)
+- Stack: Vite + React 18 (function components + hooks, JavaScript lang) + Tailwind CSS
+- Animations: `motion` (`motion/react`), reusable constants sa `src/lib/motion.js`
+- Icons: `lucide-react` para sa UI icons, `simple-icons` (inline SVG, `currentColor`) para sa tech logos
+- Theme: strictly black & white (dark `#0a0a0a`, light `#f4f4f2`) na may subtle SVG grain texture at hairlines
+- Fonts: Space Grotesk (headings), Inter (body), JetBrains Mono (labels/metadata), Instrument Serif italic (editorial accents)
+- Navigation: Fixed left sidebar sa desktop (`lg+`), top bar + accessible drawer sa mobile/tablet
+- Sections: Home, About, Stack, Work, Experience & Education, GitHub Activity, Contact, Footer
+- Content: Lahat nasa `src/config.js` at `src/data/` na may `// EDIT ME` markers; hindi hardcoded sa components
+- Accessibility & QA: Igalang ang `prefers-reduced-motion`, dark/light mode, WCAG AA contrast, keyboard navigation, at 375px/768px/1280px viewports
+- Testing: Vitest (`npm run test:unit`) at Playwright + axe-core (`npm run test:e2e`)
 
 ## Git
-- Diretso sa main, walang branches
+- Diretso sa `main`, walang branches
 - Commit message: isang linya, hindi lalampas sa 60 characters, walang body
-- Format: feat:, fix:, refactor:, style:, docs:
-- Huwag i-commit ang personal info (phone, address, ID numbers)
+- Format: `feat:`, `fix:`, `refactor:`, `style:`, `docs:`, `chore:`, `test:`
+- Huwag i-commit ang personal info (phone, full address, ID numbers), `.env`, `dist/`, `screenshots/`, o test reports
