@@ -178,6 +178,17 @@ export async function mockGitHubAPIs(page, { mode = 'success' } = {}) {
  * @param {{ include?: string, exclude?: string[] }} [options]
  */
 export async function runAxeScan(page, options = {}) {
+  // Wait for finite entrance animations (fade-ins) to settle so contrast checks measure final opacity
+  await page.evaluate(async () => {
+    const animations = document
+      .getAnimations()
+      .filter((a) => a.effect?.getComputedTiming?.().iterations !== Infinity)
+    await Promise.race([
+      Promise.allSettled(animations.map((a) => a.finished)),
+      new Promise((r) => setTimeout(r, 800)),
+    ])
+  })
+
   let builder = new AxeBuilder({ page })
   if (options.include) builder = builder.include(options.include)
   if (options.exclude) {
