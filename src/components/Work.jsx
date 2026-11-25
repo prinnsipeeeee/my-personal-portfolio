@@ -7,7 +7,7 @@ import {
   useSpring,
   useReducedMotion,
 } from 'motion/react'
-import { projectsData } from '../data/projects'
+import { projectsData, getProjectImages } from '../data/projects'
 import { SPRING, EASE, DURATION } from '../lib/motion'
 import Section from './Section'
 import ProjectModal from './ProjectModal'
@@ -23,7 +23,7 @@ export default function Work({ data = projectsData }) {
     (typeof window !== 'undefined' && window.__PORTFOLIO_TEST_OVERRIDES__?.projects) || data
 
   const [activeFilter, setActiveFilter] = useState('all')
-  const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedProjectKey, setSelectedProjectKey] = useState(null)
   const [hoveredProject, setHoveredProject] = useState(null)
   const triggerRef = useRef(null)
   const shouldReduceMotion = useReducedMotion()
@@ -84,10 +84,15 @@ export default function Work({ data = projectsData }) {
     cursorY.set(nextY)
   }
 
+  const selectedProject = useMemo(() => {
+    if (!selectedProjectKey) return null
+    return orderedProjects.find((p) => (p.id || p.title) === selectedProjectKey) || null
+  }, [orderedProjects, selectedProjectKey])
+
   const handleOpenProject = (project, buttonEl) => {
     triggerRef.current = buttonEl
     setHoveredProject(null)
-    setSelectedProject(project)
+    setSelectedProjectKey(project.id || project.title)
   }
 
   return (
@@ -153,29 +158,30 @@ export default function Work({ data = projectsData }) {
           filteredProjects.map((project, idx) => {
             const typeLabel = project.type === 'system' ? 'Web system' : 'Landing page'
             const stackList = Array.isArray(project.stack) ? project.stack.filter(Boolean) : []
+            const coverImage = getProjectImages(project)[0]?.src || ''
 
             return (
-              <div key={project.id || project.title}>
+              <div key={project.id || project.title} className="min-w-0">
                 <button
                   type="button"
                   data-testid="work-row"
                   data-project-type={project.type}
                   onClick={(e) => handleOpenProject(project, e.currentTarget)}
                   onMouseEnter={(e) => {
-                    if (project.image) {
+                    if (coverImage) {
                       handleRowPointerMove(e)
-                      setHoveredProject(project)
+                      setHoveredProject({ ...project, coverImage })
                     }
                   }}
                   onMouseMove={handleRowPointerMove}
                   onMouseLeave={() => setHoveredProject(null)}
-                  className="group w-full text-left py-6 sm:py-7 px-1 transition-colors duration-150 hover:bg-surface/60 focus-visible:bg-surface/60"
+                  className="group w-full min-w-0 overflow-hidden text-left py-6 sm:py-7 px-1 transition-colors duration-150 hover:bg-surface/60 focus-visible:bg-surface/60"
                 >
                   {/* Mobile/Tablet Inline Preview Image (hidden if blank) */}
-                  {project.image && (
+                  {coverImage && (
                     <div className="lg:hidden mb-4 border border-line bg-surface overflow-hidden">
                       <img
-                        src={project.image}
+                        src={coverImage}
                         alt={`${project.title} preview`}
                         width={800}
                         height={500}
@@ -238,7 +244,7 @@ export default function Work({ data = projectsData }) {
 
       {/* Desktop Cursor-Following Preview Image */}
       <AnimatePresence>
-        {hoveredProject?.image && !shouldReduceMotion && (
+        {hoveredProject?.coverImage && !shouldReduceMotion && (
           <motion.div
             key={hoveredProject.id}
             aria-hidden="true"
@@ -250,7 +256,7 @@ export default function Work({ data = projectsData }) {
             className="hidden lg:block fixed top-0 left-0 z-30 w-72 border border-line-strong bg-canvas p-1.5 pointer-events-none"
           >
             <img
-              src={hoveredProject.image}
+              src={hoveredProject.coverImage}
               alt=""
               width={288}
               height={180}
@@ -264,7 +270,7 @@ export default function Work({ data = projectsData }) {
       <ProjectModal
         project={selectedProject}
         triggerRef={triggerRef}
-        onClose={() => setSelectedProject(null)}
+        onClose={() => setSelectedProjectKey(null)}
       />
     </Section>
   )

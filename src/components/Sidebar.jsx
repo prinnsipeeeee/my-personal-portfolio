@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import { profileData } from '../data/profile'
 import { useManilaTime } from '../hooks/useManilaTime'
 import { SPRING } from '../lib/motion'
@@ -7,6 +7,7 @@ import ThemeToggle from './ThemeToggle'
 
 export default function Sidebar({ activeSection, onSelect }) {
   const manilaTime = useManilaTime(profileData.timezone)
+  const shouldReduceMotion = useReducedMotion()
   const isAvailable = profileData.availability?.open
 
   return (
@@ -39,7 +40,7 @@ export default function Sidebar({ activeSection, onSelect }) {
         {profileData.availability?.label && (
           <div className="flex items-center gap-2.5 border-y border-line py-2.5 font-mono text-[11px] text-muted">
             <span className="relative flex h-2 w-2 shrink-0" aria-hidden="true">
-              {isAvailable && (
+              {isAvailable && !shouldReduceMotion && (
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ink opacity-50" />
               )}
               <span
@@ -48,7 +49,7 @@ export default function Sidebar({ activeSection, onSelect }) {
                 }`}
               />
             </span>
-            <span className="truncate">
+            <span className="leading-snug">
               {isAvailable
                 ? profileData.availability.label
                 : profileData.availability.closedLabel}

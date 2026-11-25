@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" fill="none">
   <rect width="800" height="500" fill="#111111"/>
   <rect x="28" y="24" width="744" height="452" stroke="#ffffff" stroke-opacity="0.16"/>
   <line x1="28" y1="74" x2="772" y2="74" stroke="#ffffff" stroke-opacity="0.16"/>
@@ -9,5 +9,5 @@
   <rect x="70" y="204" width="182" height="60" fill="#ffffff" fill-opacity="0.08"/>
   <rect x="309" y="128" width="182" height="72" fill="#ffffff" fill-opacity="0.14"/>
   <rect x="548" y="128" width="182" height="56" fill="#ffffff" fill-opacity="0.08"/>
-  <text x="52" y="448" fill="#ffffff" fill-opacity="0.45" font-family="monospace" font-size="13">05 / BOOKING & QA SYSTEM PREVIEW</text>
+  <text x="52" y="448" fill="#ffffff" fill-opacity="0.45" font-family="monospace" font-size="13">05 / BOOKING &amp; QA SYSTEM PREVIEW</text>
 </svg>

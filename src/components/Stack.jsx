@@ -113,7 +113,7 @@ export default function Stack({ data = skillsData }) {
                               <span className="truncate">{skill.name}</span>
                             </span>
                             {skill.note && (
-                              <span className="text-xs sm:text-sm text-muted sm:text-right min-w-0">
+                              <span className="text-xs sm:text-sm text-muted sm:text-right min-w-0 break-words [overflow-wrap:anywhere]">
                                 {skill.note}
                               </span>
                             )}
@@ -146,7 +146,7 @@ export default function Stack({ data = skillsData }) {
                                 {skill.name}
                               </h4>
                               {skill.note && (
-                                <p className="mt-1 text-xs sm:text-sm text-muted leading-snug">
+                                <p className="mt-1 text-xs sm:text-sm text-muted leading-snug break-words [overflow-wrap:anywhere]">
                                   {skill.note}
                                 </p>
                               )}

@@ -15,12 +15,12 @@ export const profileData = {
   lastName: 'Peñaflor',
   initials: 'PP', // EDIT ME: Initials sa sidebar logo
   title: 'Front-End Developer', // EDIT ME: Pangunahing role headline
-  tagline: 'Crafting fast, responsive React landing pages and clean web interfaces.', // EDIT ME
-  taglinePrefix: 'Crafting fast, responsive', // EDIT ME
-  taglineAccent: 'React landing pages', // EDIT ME
-  taglineSuffix: 'and clean, accessible web interfaces.', // EDIT ME
+  tagline: 'Building fast, responsive React websites with clean, modern, and user-friendly interfaces.',
+  taglinePrefix: 'Building fast, responsive',
+  taglineAccent: 'Websites',
+  taglineSuffix: 'with clean, modern, and user-friendly interfaces.',
   currently: 'Building React landing pages & learning TypeScript + UI testing', // EDIT ME
-  cvPath: '/cv/Prince-Penaflor-CV.pdf', // EDIT ME: Ilagay ang CV PDF sa public/cv/ (huwag i-commit kung may private info)
+  cvPath: '/Prince_Albert_Cinco_Peñaflor_CV.pdf', 
   location: contactData.location,
   timezone: contactData.timezone,
   timezoneLabel: contactData.timezoneLabel,

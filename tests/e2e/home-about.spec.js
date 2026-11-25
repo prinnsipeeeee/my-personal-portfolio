@@ -19,8 +19,12 @@ test.describe('Home and About sections', () => {
   test('View work button scrolls to #work and Download CV link has valid href and download', async ({ page }) => {
     const home = page.locator('#home')
     const cvLink = home.getByRole('link', { name: /Download CV/i })
-    await expect(cvLink).toHaveAttribute('href', /\/cv\/.*\.pdf$/i)
+    await expect(cvLink).toHaveAttribute('href', /^\/.*\.pdf$/i)
     await expect(cvLink).toHaveAttribute('download', '')
+
+    const cvHref = await cvLink.getAttribute('href')
+    const cvResponse = await page.request.get(encodeURI(cvHref))
+    expect(cvResponse.ok(), `CV file at ${cvHref} returned ${cvResponse.status()}`).toBe(true)
 
     const viewWorkLink = home.getByRole('link', { name: /View work/i })
     await viewWorkLink.click()

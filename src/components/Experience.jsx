@@ -27,7 +27,7 @@ function TimelineEntry({ item, tabId, defaultOpen }) {
   const metaParts = [org, item.location, item.type, duration].filter(Boolean)
 
   return (
-    <li className="relative pl-7 sm:pl-9 pb-10 last:pb-0">
+    <li className="relative pl-7 sm:pl-9 pb-10 last:pb-0 min-w-0">
       {/* Timeline Node Dot */}
       <span
         aria-hidden="true"
@@ -45,7 +45,7 @@ function TimelineEntry({ item, tabId, defaultOpen }) {
         />
       </span>
 
-      <div className="border-b border-line pb-8">
+      <div className="border-b border-line pb-8 min-w-0">
         {/* Date Period */}
         <p className="font-mono text-xs text-subtle tracking-wide">
           {tabId === 'certifications'
@@ -54,20 +54,20 @@ function TimelineEntry({ item, tabId, defaultOpen }) {
         </p>
 
         {/* Entry Heading */}
-        <h3 className="mt-1.5 font-display text-lg sm:text-xl font-semibold tracking-tight text-ink">
+        <h3 className="mt-1.5 font-display text-lg sm:text-xl font-semibold tracking-tight text-ink break-words [overflow-wrap:anywhere]">
           {title}
         </h3>
 
         {/* Organization · Location · Type · Duration */}
         {metaParts.length > 0 && (
-          <p className="mt-1 text-sm text-muted">
+          <p className="mt-1 text-sm text-muted break-words [overflow-wrap:anywhere]">
             {metaParts.join(' · ')}
           </p>
         )}
 
         {/* Education / Certification Note */}
         {item.note && (
-          <p className="mt-2 text-xs sm:text-sm text-subtle leading-relaxed">
+          <p className="mt-2 text-xs sm:text-sm text-subtle leading-relaxed break-words [overflow-wrap:anywhere]">
             {item.note}
           </p>
         )}
@@ -107,18 +107,18 @@ function TimelineEntry({ item, tabId, defaultOpen }) {
                     {highlights.length > 0 && (
                       <ul className="space-y-1.5 text-sm text-muted leading-relaxed">
                         {highlights.map((bullet, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5">
-                            <span className="font-mono text-subtle select-none" aria-hidden="true">
+                          <li key={idx} className="flex items-start gap-2.5 min-w-0">
+                            <span className="font-mono text-subtle select-none shrink-0" aria-hidden="true">
                               —
                             </span>
-                            <span>{bullet}</span>
+                            <span className="break-words [overflow-wrap:anywhere]">{bullet}</span>
                           </li>
                         ))}
                       </ul>
                     )}
 
                     {tech.length > 0 && (
-                      <p className="font-mono text-xs text-subtle pt-1">
+                      <p className="font-mono text-xs text-subtle pt-1 break-words [overflow-wrap:anywhere]">
                         <span className="text-muted">Stack:</span> {tech.join(' · ')}
                       </p>
                     )}
@@ -192,7 +192,7 @@ export default function Experience({ data = experienceData }) {
                 role="tablist"
                 aria-label="Experience and education categories"
                 onKeyDown={handleTabKeyDown}
-                className="flex flex-row lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 border-b lg:border-b-0 border-line"
+                className="flex flex-row lg:flex-col gap-1 sm:gap-2 overflow-x-auto pb-2 lg:pb-0 border-b lg:border-b-0 border-line"
               >
                 {tabs.map((tab) => {
                   const isActive = tab.id === activeTabId
@@ -206,7 +206,7 @@ export default function Experience({ data = experienceData }) {
                       aria-controls={`exp-panel-${tab.id}`}
                       tabIndex={isActive ? 0 : -1}
                       onClick={() => setSelectedTab(tab.id)}
-                      className={`relative flex items-center justify-between gap-4 px-3 py-2.5 text-left text-sm whitespace-nowrap transition-colors duration-150 ${
+                      className={`relative flex items-center justify-between gap-2 sm:gap-4 px-2 sm:px-3 py-2.5 text-left text-xs sm:text-sm whitespace-nowrap transition-colors duration-150 ${
                         isActive ? 'text-ink font-medium' : 'text-muted hover:text-ink'
                       }`}
                     >
@@ -234,7 +234,7 @@ export default function Experience({ data = experienceData }) {
             id={`exp-panel-${activeTabId}`}
             role="tabpanel"
             aria-labelledby={tabs.length > 1 ? `exp-tab-${activeTabId}` : undefined}
-            className={tabs.length > 1 ? 'lg:col-span-8' : 'lg:col-span-12'}
+            className={tabs.length > 1 ? 'lg:col-span-8 min-w-0' : 'lg:col-span-12 min-w-0'}
           >
             <AnimatePresence mode="wait">
               <motion.ol

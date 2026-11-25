@@ -34,7 +34,7 @@ export default function Home() {
           {profileData.availability?.label && (
             <span className="inline-flex items-center gap-2 border border-line bg-canvas px-3 py-1 font-mono text-[11px] text-ink">
               <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
-                {isAvailable && (
+                {isAvailable && !shouldReduceMotion && (
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-ink opacity-50" />
                 )}
                 <span
@@ -54,7 +54,7 @@ export default function Home() {
 
         {/* Primary Name & Front-End Developer Headline */}
         <motion.div {...itemProps(0.06)}>
-          <h1 className="font-display tracking-tighter text-ink leading-[0.96]">
+          <h1 className="font-display tracking-tighter text-ink leading-[1.08]">
             <span className="block uppercase text-[clamp(2.75rem,8vw,6.25rem)] font-bold">
               {profileData.firstName}{' '}
               <span className="font-medium text-muted">{profileData.lastName}</span>

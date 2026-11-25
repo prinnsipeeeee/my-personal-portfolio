@@ -77,7 +77,7 @@ export default function Contact({ data = contactData }) {
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
         {/* Left Column: Intro, Availability, Response Time, Checklist */}
-        <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-16">
+        <div className="lg:col-span-5 min-w-0 space-y-6 lg:sticky lg:top-16">
           <Reveal as="p" className="text-sm sm:text-base text-muted leading-relaxed">
             Need a responsive React landing page, a UI refresh, or a front-end partner for a web system? Pick a starting point or send an email directly.
           </Reveal>
@@ -124,7 +124,7 @@ export default function Contact({ data = contactData }) {
                       className="mt-2 w-1.5 h-1.5 rounded-full bg-ink shrink-0"
                       aria-hidden="true"
                     />
-                    <span>{item}</span>
+                    <span className="break-words [overflow-wrap:anywhere]">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -133,7 +133,7 @@ export default function Contact({ data = contactData }) {
         </div>
 
         {/* Right Column: Hairline-Separated Direct Contact Actions */}
-        <div className="lg:col-span-7 divide-y divide-line">
+        <div className="lg:col-span-7 min-w-0 divide-y divide-line">
           {/* 1. Start a Project (Mailto Template Pills) */}
           {projectTypes.length > 0 && email && (
             <Reveal className="pb-9">
